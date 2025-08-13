@@ -8,9 +8,9 @@
 
 ## 🧑‍💻 Contributors
 
-Gaurav Bhatt  
-Shashank Sharma  
-Shubham Negi
+gaurav bhatt  
+shashank sharma  
+shubham negi
 
 ---
 

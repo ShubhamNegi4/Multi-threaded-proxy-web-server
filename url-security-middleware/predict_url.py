@@ -17,7 +17,12 @@ MAX_LEN = 200  # Must match training
 THRESHOLD = 0.80  # Confidence threshold
 
 # ✅ Trusted allowlist of known safe domains
-
+allowlist = [
+    "www.google.com",
+    "www.microsoft.com",
+    "github.com",
+    "www.wikipedia.org"
+]
 
 # 🔍 Input URLs for prediction
 urls = [
@@ -29,7 +34,6 @@ urls = [
     "http://free-bitcoin.ru/get-rich-now",
     "https://secure-login.ph1sh.xyz/index.php?id=123",
     "http://malware-download.biz/<script>alert(1)</script>",
-    "https://httpbin.org/get",
     # Invalid/non-URL
     "hmy name name",
     "just some random text",
@@ -40,32 +44,7 @@ urls = [
     "http://clickjack.tk/?q=' OR 1=1 --",
     "http://example.com/%3Csvg/onload=alert(1)%3E"
 ]
-allowlist = [
-    "www.google.com",
-    "google.com",
-    "www.microsoft.com",
-    "microsoft.com",
-    "github.com",
-    "www.github.com",
-    "www.wikipedia.org",
-    "wikipedia.org",
-    "httpbin.org",
-    "www.httpbin.org",
-    "example.com",
-    "www.example.com",
-    "stackoverflow.com",
-    "www.stackoverflow.com",
-    "reddit.com",
-    "www.reddit.com",
-    "youtube.com",
-    "www.youtube.com",
-    "facebook.com",
-    "www.facebook.com",
-    "twitter.com",
-    "www.twitter.com",
-    "linkedin.com",
-    "www.linkedin.com"
-]
+
 def predict_url(url: str):
     """Predict class for a URL or string. Returns top-2 classes and confidences, with explanations for not_a_url/edge_case."""
     # Convert HttpUrl object to string if needed
