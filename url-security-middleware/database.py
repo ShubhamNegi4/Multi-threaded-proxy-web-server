@@ -18,16 +18,17 @@ class URLLog(Base):
     category = Column(String, nullable=False)
     reasons = Column(Text)  # Store as JSON string
     timestamp = Column(DateTime, default=datetime.utcnow)
+     def get_reasons(self):
+        """Get reasons as list"""
+        if self.reasons:
+            return json.loads(self.reasons)
+        return []
 
     def set_reasons(self, reasons_list):
         """Set reasons as JSON string"""
         self.reasons = json.dumps(reasons_list)
     
-    def get_reasons(self):
-        """Get reasons as list"""
-        if self.reasons:
-            return json.loads(self.reasons)
-        return []
+   
 
 # Create table if it doesn't exist
 Base.metadata.create_all(bind=engine)
