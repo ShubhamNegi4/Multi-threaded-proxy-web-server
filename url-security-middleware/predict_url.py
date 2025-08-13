@@ -17,6 +17,29 @@ MAX_LEN = 200  # Must match training
 THRESHOLD = 0.80  # Confidence threshold
 
 # ✅ Trusted allowlist of known safe domains
+
+
+# 🔍 Input URLs for prediction
+urls = [
+    # Valid benign
+    "https://www.google.com",
+    "https://github.com",
+    "https://university.edu/home?ref=42",
+    # Malicious
+    "http://free-bitcoin.ru/get-rich-now",
+    "https://secure-login.ph1sh.xyz/index.php?id=123",
+    "http://malware-download.biz/<script>alert(1)</script>",
+    "https://httpbin.org/get",
+    # Invalid/non-URL
+    "hmy name name",
+    "just some random text",
+    "1234567890",
+    # Edge-case
+    "http://192.168.1.1",
+    "ftp://example.com/resource",
+    "http://clickjack.tk/?q=' OR 1=1 --",
+    "http://example.com/%3Csvg/onload=alert(1)%3E"
+]
 allowlist = [
     "www.google.com",
     "google.com",
@@ -43,29 +66,6 @@ allowlist = [
     "linkedin.com",
     "www.linkedin.com"
 ]
-
-# 🔍 Input URLs for prediction
-urls = [
-    # Valid benign
-    "https://www.google.com",
-    "https://github.com",
-    "https://university.edu/home?ref=42",
-    # Malicious
-    "http://free-bitcoin.ru/get-rich-now",
-    "https://secure-login.ph1sh.xyz/index.php?id=123",
-    "http://malware-download.biz/<script>alert(1)</script>",
-    "https://httpbin.org/get",
-    # Invalid/non-URL
-    "hmy name name",
-    "just some random text",
-    "1234567890",
-    # Edge-case
-    "http://192.168.1.1",
-    "ftp://example.com/resource",
-    "http://clickjack.tk/?q=' OR 1=1 --",
-    "http://example.com/%3Csvg/onload=alert(1)%3E"
-]
-
 def predict_url(url: str):
     """Predict class for a URL or string. Returns top-2 classes and confidences, with explanations for not_a_url/edge_case."""
     # Convert HttpUrl object to string if needed
